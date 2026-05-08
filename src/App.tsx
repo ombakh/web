@@ -63,16 +63,16 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0000aa] px-5 font-mono text-white"
-      exit={{ opacity: 0, filter: 'blur(12px)' }}
-      transition={{ duration: 0.7, ease: terminalEase }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#000080] px-4 font-mono text-white"
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.45, ease: terminalEase }}
     >
-      <div className="crt-shell w-full max-w-3xl border border-white/60 bg-[#0000aa]/80 p-5 shadow-[0_0_80px_rgba(110,190,255,0.38)] sm:p-8">
-        <div className="mb-6 flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-white/70">
+      <div className="crt-shell w-full max-w-3xl p-4 sm:p-6">
+        <div className="mb-5 flex items-center gap-2 text-[13px] text-white">
           <Power size={15} />
           BIOS_REVISION_0MBAK.05
         </div>
-        <div className="space-y-3 text-sm leading-relaxed sm:text-base">
+        <div className="space-y-2 text-[13px] leading-[1.22] sm:text-[15px]">
           {bootLines.slice(0, visibleLines).map((line) => (
             <motion.p
               key={line}
@@ -100,7 +100,7 @@ function SystemButton({
   onClick?: () => void
 }) {
   const className =
-    'system-button inline-flex items-center justify-center gap-2 border border-white/80 px-4 py-3 text-xs font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-[#0000aa] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0000aa]'
+    'system-button inline-flex items-center justify-center gap-2 border border-white px-3 py-2 text-[13px] text-white transition hover:bg-white hover:text-[#000080] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#000080]'
 
   if (href) {
     return (
@@ -129,13 +129,13 @@ function SectionFrame({
   return (
     <motion.section
       id={id}
-      className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-10 lg:py-24"
+      className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-10 lg:py-20"
       initial={{ opacity: 0, y: 42 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-120px' }}
       transition={{ duration: 0.72, ease: terminalEase }}
     >
-      <div className="mb-8 flex items-center gap-3 border-b border-white/35 pb-3 font-mono text-xs uppercase tracking-[0.22em] text-white/70">
+      <div className="mb-8 flex items-center gap-2 border-b border-white/40 pb-3 font-mono text-[13px] text-white">
         <Terminal size={16} />
         {label}
       </div>
@@ -146,32 +146,48 @@ function SectionFrame({
 
 function Hero({ soundEnabled, toggleSound }: { soundEnabled: boolean; toggleSound: () => void }) {
   return (
-    <section className="relative flex min-h-screen items-center px-4 pb-16 pt-24 sm:px-6 lg:px-10">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+    <section className="relative flex min-h-screen items-center px-4 py-12 sm:px-6 lg:px-10">
+      <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:items-start">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: terminalEase }}
           className="max-w-4xl"
         >
-          <p className="mb-6 font-mono text-xs uppercase tracking-[0.24em] text-white/70">
-            *** STOP: Portfolio kernel recovered ***
+          <p className="mb-5 font-mono text-[13px] leading-[1.22] text-white sm:text-[15px]">
+            A problem has been detected and ombak.dev has been loaded to prevent damage
+            <br />
+            to your computer.
           </p>
-          <h1 className="glitch-title font-mono text-[clamp(2.45rem,7vw,7.2rem)] font-bold uppercase leading-[0.95] text-white">
-            A problem has been detected...
+          <h1 className="glitch-title font-mono text-[clamp(1.25rem,3.2vw,2.65rem)] font-normal uppercase leading-[1.08] text-white">
+            OM_BAKHSHI_PORTFOLIO.EXE
           </h1>
           <motion.p
-            className="mt-7 font-mono text-[clamp(1.2rem,3vw,2.5rem)] font-bold text-white"
+            className="mt-6 max-w-3xl font-mono text-[13px] leading-[1.22] text-white sm:text-[15px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.45, duration: 0.7 }}
           >
-            OM_BAKHSHI_PORTFOLIO.EXE<span className="cursor-block ml-2 inline-block h-7 w-3 bg-white align-middle" />
+            The problem seems to be caused by the following file: OMBAKDEV.SYS
+            <br />
+            <br />
+            PORTFOLIO_FAULT_IN_NONPAGED_AREA
+            <br />
+            <br />
+            If this is the first time you&apos;ve seen this portfolio screen, continue.
+            If this screen appears again, follow these steps:
+            <br />
+            <br />
+            Check to make sure any new hardware or software is properly installed.
+            If you need to use Safe Mode to remove or disable components, restart your
+            computer, press F8 to select Advanced Startup Options, and then select
+            ombak.dev.
+            <span className="cursor-block ml-1 inline-block h-4 w-2 bg-white align-middle" />
           </motion.p>
-          <p className="mt-5 max-w-2xl font-mono text-base leading-7 text-white/86 sm:text-lg">
+          <p className="mt-6 max-w-2xl font-mono text-[13px] leading-[1.35] text-white sm:text-[15px]">
             Software Developer / Embedded Systems / Full Stack
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <SystemButton href="#projects">
               View modules <ExternalLink size={16} />
             </SystemButton>
@@ -191,16 +207,16 @@ function Hero({ soundEnabled, toggleSound }: { soundEnabled: boolean; toggleSoun
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.25, duration: 0.8, ease: terminalEase }}
         >
-          <div className="mb-4 flex items-center justify-between border-b border-white/40 pb-3 text-xs uppercase tracking-[0.18em] text-white/70">
-            <span>Crash Dump</span>
+          <div className="mb-4 flex items-center justify-between text-[13px] text-white">
+            <span>Technical information:</span>
             <Pause size={15} />
           </div>
-          <div className="space-y-3 text-sm leading-6 text-white/86">
+          <div className="space-y-3 text-[13px] leading-[1.22] text-white sm:text-[15px]">
             {diagnostics.map((line) => (
               <p key={line}>{line}</p>
             ))}
           </div>
-          <div className="memory-dump mt-6 h-32 overflow-hidden border-t border-white/25 pt-4 text-[0.68rem] leading-5 text-white/45">
+          <div className="memory-dump mt-6 h-28 overflow-hidden text-[12px] leading-[1.25] text-white/80">
             {Array.from({ length: 14 }).map((_, index) => (
               <p key={index}>
                 {`0x${(4096 + index * 16).toString(16).toUpperCase()}: 4F 4D 42 41 4B 20 44 45 56 20 43 52 54 20 ${String(index).padStart(2, '0')}`}
@@ -225,7 +241,7 @@ function About() {
   return (
     <SectionFrame id="about" label="SYSTEM_INFORMATION">
       <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-        <h2 className="font-mono text-3xl font-bold uppercase leading-tight text-white sm:text-5xl">
+        <h2 className="font-mono text-xl font-normal leading-[1.22] text-white sm:text-2xl">
           Crash dump analysis points to a developer who likes the low levels and the whole stack.
         </h2>
         <div className="system-window">
@@ -236,7 +252,7 @@ function About() {
           <div className="space-y-5 p-5 sm:p-6">
             {facts.map(([key, value]) => (
               <div key={key} className="grid gap-2 border-b border-white/15 pb-4 font-mono sm:grid-cols-[170px_1fr]">
-                <span className="text-xs uppercase tracking-[0.18em] text-white/50">{key}</span>
+                <span className="text-[13px] text-white">{key}</span>
                 <span className="text-white/88">{value}</span>
               </div>
             ))}
@@ -261,9 +277,9 @@ function ProjectWindow({ project, index }: { project: Project; index: number }) 
         <span>{open ? 'EXPANDED' : project.status}</span>
       </button>
       <div className="p-5 sm:p-6">
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-white/50">{project.status}</p>
-        <h3 className="font-mono text-2xl font-bold uppercase text-white">{project.title}</h3>
-        <p className="mt-4 leading-7 text-white/76">{project.summary}</p>
+        <p className="mb-3 font-mono text-[13px] text-white">{project.status}</p>
+        <h3 className="font-mono text-xl font-normal uppercase leading-[1.15] text-white">{project.title}</h3>
+        <p className="mt-4 text-[14px] leading-[1.35] text-white">{project.summary}</p>
         <AnimatePresence initial={false}>
           {open && (
             <motion.div
@@ -272,10 +288,10 @@ function ProjectWindow({ project, index }: { project: Project; index: number }) 
               exit={{ height: 0, opacity: 0 }}
               className="overflow-hidden"
             >
-              <p className="mt-5 border-t border-white/15 pt-5 leading-7 text-white/78">{project.details}</p>
+              <p className="mt-5 border-t border-white/35 pt-5 text-[14px] leading-[1.35] text-white">{project.details}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {project.stack.map((item) => (
-                  <span key={item} className="border border-white/35 px-2.5 py-1 font-mono text-xs uppercase text-white/78">
+                  <span key={item} className="border border-white px-2.5 py-1 font-mono text-[12px] uppercase text-white">
                     {item}
                   </span>
                 ))}
@@ -284,7 +300,7 @@ function ProjectWindow({ project, index }: { project: Project; index: number }) 
                 {project.links.map((link) => (
                   <a
                     key={link.label}
-                    className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-[0.14em] text-white underline decoration-white/35 underline-offset-4 hover:decoration-white"
+                    className="inline-flex items-center gap-2 font-mono text-[13px] text-white underline decoration-white underline-offset-4"
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
@@ -318,18 +334,18 @@ function Skills() {
   return (
     <SectionFrame id="skills" label="TERMINAL_OUTPUT">
       <div className="system-window p-5 sm:p-7">
-        <p className="font-mono text-sm text-white/62">&gt; enumerate --skills --format=stream</p>
+        <p className="font-mono text-[13px] text-white">&gt; enumerate --skills --format=stream</p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill, index) => (
             <motion.div
               key={skill}
-              className="terminal-line border-l border-white/35 pl-4 font-mono text-white/86"
+              className="terminal-line border-l border-white pl-4 font-mono text-[14px] text-white"
               initial={{ opacity: 0, x: -12 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.035 }}
             >
-              <span className="text-white/45">[{String(index + 1).padStart(2, '0')}]</span> {skill}
+              <span className="text-white">[{String(index + 1).padStart(2, '0')}]</span> {skill}
             </motion.div>
           ))}
         </div>
@@ -355,7 +371,7 @@ function Contact() {
   return (
     <SectionFrame id="contact" label="COMMAND_TERMINAL">
       <div className="system-window p-5 sm:p-7">
-        <p className="font-mono text-sm text-white/62">&gt; open contact_channels</p>
+        <p className="font-mono text-[13px] text-white">&gt; open contact_channels</p>
         <div className="mt-6 space-y-4">
           {contacts.map(({ label, value, href, icon: Icon }) => (
             <div key={value} className="flex flex-col gap-3 border-b border-white/15 pb-4 font-mono sm:flex-row sm:items-center sm:justify-between">

@@ -78,8 +78,8 @@ export const skills = [
 ]
 
 export const diagnostics = [
-  'STOP: 0x0000000A (0x0MBAK, 0xDEV, 0xC0DE, 0xART)',
-  'FAULTING_MODULE: OM_BAKHSHI_PORTFOLIO.EXE',
-  'STACK_TRACE: embedded_systems -> full_stack -> experimental_software',
-  'DUMP_PROGRESS: 100% portfolio memory written to ombak.dev',
+  '*** STOP: 0x00000050 (0x0MBAKDEV,0x00000001,0xC0DEBEEF,0x00000000)',
+  '*** OM_BAKHSHI_PORTFOLIO.EXE - Address 0MBAK517 base at 0000DEV0',
+  'Beginning dump of portfolio memory',
+  'Physical memory dump complete.',
 ]
