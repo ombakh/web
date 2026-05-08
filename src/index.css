@@ -74,13 +74,15 @@ a {
   backdrop-filter: none;
 }
 
-.diagnostic-panel {
-  border: 0;
-  padding: 0;
-}
-
 .system-window {
   border: 1px solid rgba(255, 255, 255, 0.86);
+}
+
+.headshot-slot {
+  background:
+    linear-gradient(135deg, transparent 49.5%, rgba(255, 255, 255, 0.85) 50%, transparent 50.5%),
+    linear-gradient(45deg, transparent 49.5%, rgba(255, 255, 255, 0.85) 50%, transparent 50.5%),
+    #000080;
 }
 
 .window-bar {
@@ -138,10 +140,6 @@ a {
 
 .terminal-line {
   min-height: 2.2rem;
-}
-
-.memory-dump {
-  mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
 }
 
 .boot-line::before {

@@ -4,7 +4,6 @@ import {
   Clipboard,
   ExternalLink,
   Mail,
-  Pause,
   Power,
   Terminal,
   UserRound,
@@ -12,9 +11,26 @@ import {
   VolumeX,
 } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { bootLines, diagnostics, projects, skills, type Project } from './data/portfolio'
+import {
+  bootLines,
+  certifications,
+  diagnostics,
+  education,
+  experience,
+  projects,
+  skills,
+  type Experience,
+  type Project,
+} from './data/portfolio'
 
 const terminalEase = [0.22, 1, 0.36, 1] as const
+type MotionElement = React.ComponentType<Record<string, unknown> & { children?: React.ReactNode }>
+const Motion = motion as unknown as {
+  article: MotionElement
+  div: MotionElement
+  p: MotionElement
+  section: MotionElement
+}
 
 function useKeyboardClickSound(enabled: boolean) {
   const audioRef = useRef<AudioContext | null>(null)
@@ -62,7 +78,7 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
   }, [onComplete])
 
   return (
-    <motion.div
+    <Motion.div
       className="fixed inset-0 z-50 flex items-center justify-center bg-[#000080] px-4 font-mono text-white"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.45, ease: terminalEase }}
@@ -74,19 +90,19 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
         </div>
         <div className="space-y-2 text-[13px] leading-[1.22] sm:text-[15px]">
           {bootLines.slice(0, visibleLines).map((line) => (
-            <motion.p
+            <Motion.p
               key={line}
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               className="boot-line"
             >
               {line}
-            </motion.p>
+            </Motion.p>
           ))}
           <span className="cursor-block ml-1 inline-block h-5 w-2 bg-white align-middle" />
         </div>
       </div>
-    </motion.div>
+    </Motion.div>
   )
 }
 
@@ -127,7 +143,7 @@ function SectionFrame({
   children: React.ReactNode
 }) {
   return (
-    <motion.section
+    <Motion.section
       id={id}
       className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 lg:px-10 lg:py-20"
       initial={{ opacity: 0, y: 42 }}
@@ -140,7 +156,7 @@ function SectionFrame({
         {label}
       </div>
       {children}
-    </motion.section>
+    </Motion.section>
   )
 }
 
@@ -148,48 +164,41 @@ function Hero({ soundEnabled, toggleSound }: { soundEnabled: boolean; toggleSoun
   return (
     <section className="relative flex min-h-screen items-center px-4 py-12 sm:px-6 lg:px-10">
       <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:items-start">
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: terminalEase }}
           className="max-w-4xl"
         >
           <p className="mb-5 font-mono text-[13px] leading-[1.22] text-white sm:text-[15px]">
-            A problem has been detected and ombak.dev has been loaded to prevent damage
-            <br />
-            to your computer.
+            ombak.dev
           </p>
           <h1 className="glitch-title font-mono text-[clamp(1.25rem,3.2vw,2.65rem)] font-normal uppercase leading-[1.08] text-white">
-            OM_BAKHSHI_PORTFOLIO.EXE
+            OM_BAKHSHI.EXE
           </h1>
-          <motion.p
+          <Motion.p
             className="mt-6 max-w-3xl font-mono text-[13px] leading-[1.22] text-white sm:text-[15px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.45, duration: 0.7 }}
           >
-            The problem seems to be caused by the following file: OMBAKDEV.SYS
+            Software developer focused on full stack applications, embedded systems, and applied AI tools.
             <br />
             <br />
-            PORTFOLIO_FAULT_IN_NONPAGED_AREA
+            Computer Engineering Technology student at Kent State University, expected to graduate
+            in December 2026.
             <br />
             <br />
-            If this is the first time you&apos;ve seen this portfolio screen, continue.
-            If this screen appears again, follow these steps:
-            <br />
-            <br />
-            Check to make sure any new hardware or software is properly installed.
-            If you need to use Safe Mode to remove or disable components, restart your
-            computer, press F8 to select Advanced Startup Options, and then select
-            ombak.dev.
+            Recent work includes OAuth tooling, retrieval-augmented chat systems, and a
+            LiDAR/IR teleoperation platform.
             <span className="cursor-block ml-1 inline-block h-4 w-2 bg-white align-middle" />
-          </motion.p>
+          </Motion.p>
           <p className="mt-6 max-w-2xl font-mono text-[13px] leading-[1.35] text-white sm:text-[15px]">
-            Software Developer / Embedded Systems / Full Stack
+            Software Developer / Computer Engineering Technology / Full Stack
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <SystemButton href="#projects">
-              View modules <ExternalLink size={16} />
+              View projects <ExternalLink size={16} />
             </SystemButton>
             <SystemButton href="#contact">
               Open terminal <Terminal size={16} />
@@ -199,31 +208,34 @@ function Hero({ soundEnabled, toggleSound }: { soundEnabled: boolean; toggleSoun
               key clicks
             </SystemButton>
           </div>
-        </motion.div>
+        </Motion.div>
 
-        <motion.div
-          className="diagnostic-panel font-mono"
+        <Motion.div
+          className="system-window font-mono"
           initial={{ opacity: 0, x: 28 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.25, duration: 0.8, ease: terminalEase }}
         >
-          <div className="mb-4 flex items-center justify-between text-[13px] text-white">
-            <span>Technical information:</span>
-            <Pause size={15} />
+          <div className="window-bar">
+            <span>profile.img</span>
+            <span>placeholder</span>
           </div>
-          <div className="space-y-3 text-[13px] leading-[1.22] text-white sm:text-[15px]">
-            {diagnostics.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
+          <div className="grid gap-5 p-4 sm:grid-cols-[180px_1fr] sm:p-5">
+            <div className="headshot-slot aspect-[4/5] w-full max-w-[220px] justify-self-center border border-white">
+              <div className="flex h-full items-center justify-center p-4 text-center text-[13px] leading-[1.25] text-white">
+                HEADSHOT
+                <br />
+                PLACEHOLDER
+              </div>
+            </div>
+            <div className="space-y-3 text-[13px] leading-[1.28] text-white sm:text-[15px]">
+              <p>Profile</p>
+              {diagnostics.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+            </div>
           </div>
-          <div className="memory-dump mt-6 h-28 overflow-hidden text-[12px] leading-[1.25] text-white/80">
-            {Array.from({ length: 14 }).map((_, index) => (
-              <p key={index}>
-                {`0x${(4096 + index * 16).toString(16).toUpperCase()}: 4F 4D 42 41 4B 20 44 45 56 20 43 52 54 20 ${String(index).padStart(2, '0')}`}
-              </p>
-            ))}
-          </div>
-        </motion.div>
+        </Motion.div>
       </div>
     </section>
   )
@@ -231,18 +243,19 @@ function Hero({ soundEnabled, toggleSound }: { soundEnabled: boolean; toggleSoun
 
 function About() {
   const facts = [
-    ['ROLE', 'Software developer'],
-    ['EDUCATION', 'Computer Engineering Technology student'],
-    ['SYSTEMS', 'Embedded systems, robotics, hardware-aware software'],
-    ['STACK', 'Full stack development, APIs, real-time interfaces'],
-    ['CURRENT_SIGNAL', 'Building weird and useful systems with AI-assisted workflows'],
+    ['EDUCATION', 'B.S. Computer Engineering Technology, Kent State University'],
+    ['GRADUATION', 'Expected Dec 2026'],
+    ['CURRENT WORK', 'Software Developer Intern at Progressive Insurance'],
+    ['TECHNICAL FOCUS', 'Full stack development, embedded systems, applied AI'],
+    ['LEADERSHIP', 'Alpha Tau Omega recruitment chair and external philanthropy chair'],
   ]
 
   return (
     <SectionFrame id="about" label="SYSTEM_INFORMATION">
       <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
         <h2 className="font-mono text-xl font-normal leading-[1.22] text-white sm:text-2xl">
-          Crash dump analysis points to a developer who likes the low levels and the whole stack.
+          Computer Engineering Technology student building software across web systems, internal tools,
+          robotics, and applied machine learning.
         </h2>
         <div className="system-window">
           <div className="window-bar">
@@ -263,11 +276,65 @@ function About() {
   )
 }
 
+function ExperienceWindow({ item }: { item: Experience }) {
+  return (
+    <article className="system-window">
+      <div className="window-bar">
+        <span>{item.role}</span>
+        <span>{item.date}</span>
+      </div>
+      <div className="p-5 sm:p-6">
+        <p className="font-mono text-[13px] text-white">{item.organization}</p>
+        <p className="mt-4 text-[14px] leading-[1.35] text-white">{item.summary}</p>
+        <ul className="mt-5 space-y-3 text-[14px] leading-[1.35] text-white">
+          {item.highlights.map((highlight) => (
+            <li key={highlight} className="border-l border-white pl-4">
+              {highlight}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </article>
+  )
+}
+
+function ResumeDetails() {
+  return (
+    <SectionFrame id="experience" label="EXPERIENCE">
+      <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="space-y-5">
+          <div className="system-window p-5 sm:p-6">
+            <p className="mb-4 font-mono text-[13px] text-white">&gt; education</p>
+            <div className="space-y-3 text-[14px] leading-[1.35] text-white">
+              {education.map((item) => (
+                <p key={item}>{item}</p>
+              ))}
+            </div>
+          </div>
+          <div className="system-window p-5 sm:p-6">
+            <p className="mb-4 font-mono text-[13px] text-white">&gt; certifications</p>
+            <div className="space-y-3 text-[14px] leading-[1.35] text-white">
+              {certifications.map((item) => (
+                <p key={item}>{item}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="space-y-5">
+          {experience.map((item) => (
+            <ExperienceWindow key={`${item.role}-${item.organization}`} item={item} />
+          ))}
+        </div>
+      </div>
+    </SectionFrame>
+  )
+}
+
 function ProjectWindow({ project, index }: { project: Project; index: number }) {
   const [open, setOpen] = useState(index === 0)
 
   return (
-    <motion.article
+    <Motion.article
       className="system-window project-window"
       whileHover={{ y: -6, filter: 'drop-shadow(0 0 24px rgba(255,255,255,0.18))' }}
       transition={{ type: 'spring', stiffness: 260, damping: 24 }}
@@ -282,7 +349,7 @@ function ProjectWindow({ project, index }: { project: Project; index: number }) 
         <p className="mt-4 text-[14px] leading-[1.35] text-white">{project.summary}</p>
         <AnimatePresence initial={false}>
           {open && (
-            <motion.div
+            <Motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -310,17 +377,17 @@ function ProjectWindow({ project, index }: { project: Project; index: number }) 
                   </a>
                 ))}
               </div>
-            </motion.div>
+            </Motion.div>
           )}
         </AnimatePresence>
       </div>
-    </motion.article>
+    </Motion.article>
   )
 }
 
 function Projects() {
   return (
-    <SectionFrame id="projects" label="CORRUPTED_MODULES">
+    <SectionFrame id="projects" label="PROJECTS">
       <div className="grid gap-5 md:grid-cols-2">
         {projects.map((project, index) => (
           <ProjectWindow key={project.file} project={project} index={index} />
@@ -332,12 +399,12 @@ function Projects() {
 
 function Skills() {
   return (
-    <SectionFrame id="skills" label="TERMINAL_OUTPUT">
+    <SectionFrame id="skills" label="SKILLS">
       <div className="system-window p-5 sm:p-7">
-        <p className="font-mono text-[13px] text-white">&gt; enumerate --skills --format=stream</p>
+        <p className="font-mono text-[13px] text-white">&gt; skills</p>
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill, index) => (
-            <motion.div
+            <Motion.div
               key={skill}
               className="terminal-line border-l border-white pl-4 font-mono text-[14px] text-white"
               initial={{ opacity: 0, x: -12 }}
@@ -346,7 +413,7 @@ function Skills() {
               transition={{ delay: index * 0.035 }}
             >
               <span className="text-white">[{String(index + 1).padStart(2, '0')}]</span> {skill}
-            </motion.div>
+            </Motion.div>
           ))}
         </div>
       </div>
@@ -358,8 +425,8 @@ function Contact() {
   const [copied, setCopied] = useState<string | null>(null)
   const contacts = [
     { label: 'github.com/ombakh', value: 'https://github.com/ombakh', href: 'https://github.com/ombakh', icon: Code2 },
-    { label: 'linkedin', value: 'https://www.linkedin.com/in/ombakhshi', href: 'https://www.linkedin.com/in/ombakhshi', icon: UserRound },
-    { label: 'obakhshi_stu@kent.edu', value: 'obakhshi_stu@kent.edu', href: 'mailto:obakhshi_stu@kent.edu', icon: Mail },
+    { label: 'linkedin.com/in/ombakh', value: 'https://www.linkedin.com/in/ombakh', href: 'https://www.linkedin.com/in/ombakh', icon: UserRound },
+    { label: 'ombakh28@gmail.com', value: 'ombakh28@gmail.com', href: 'mailto:ombakh28@gmail.com', icon: Mail },
   ]
 
   async function copy(value: string) {
@@ -369,9 +436,9 @@ function Contact() {
   }
 
   return (
-    <SectionFrame id="contact" label="COMMAND_TERMINAL">
+    <SectionFrame id="contact" label="CONTACT">
       <div className="system-window p-5 sm:p-7">
-        <p className="font-mono text-[13px] text-white">&gt; open contact_channels</p>
+        <p className="font-mono text-[13px] text-white">&gt; contact</p>
         <div className="mt-6 space-y-4">
           {contacts.map(({ label, value, href, icon: Icon }) => (
             <div key={value} className="flex flex-col gap-3 border-b border-white/15 pb-4 font-mono sm:flex-row sm:items-center sm:justify-between">
@@ -392,38 +459,6 @@ function Contact() {
         </div>
       </div>
     </SectionFrame>
-  )
-}
-
-function EasterEgg() {
-  const [active, setActive] = useState(false)
-
-  useEffect(() => {
-    let buffer = ''
-    const handler = (event: KeyboardEvent) => {
-      buffer = `${buffer}${event.key.toLowerCase()}`.slice(-9)
-      if (buffer.includes('blue')) {
-        setActive(true)
-        window.setTimeout(() => setActive(false), 2600)
-      }
-    }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [])
-
-  return (
-    <AnimatePresence>
-      {active && (
-        <motion.div
-          className="pointer-events-none fixed inset-x-4 top-8 z-40 mx-auto max-w-xl border border-white bg-[#0000aa] p-4 text-center font-mono text-sm uppercase tracking-[0.18em] text-white shadow-[0_0_50px_rgba(255,255,255,0.26)]"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-        >
-          HIDDEN_INTERRUPT: BLUE_SCREEN_ART_MODE_CONFIRMED
-        </motion.div>
-      )}
-    </AnimatePresence>
   )
 }
 
@@ -448,11 +483,11 @@ function App() {
       <main className="relative z-10">
         <Hero soundEnabled={soundEnabled} toggleSound={() => setSoundEnabled((value) => !value)} />
         <About />
+        <ResumeDetails />
         <Projects />
         <Skills />
         <Contact />
       </main>
-      <EasterEgg />
     </div>
   )
 }

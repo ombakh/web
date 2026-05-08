@@ -8,54 +8,66 @@ export type Project = {
   links: { label: string; href: string }[]
 }
 
+export type Experience = {
+  role: string
+  organization: string
+  date: string
+  summary: string
+  highlights: string[]
+}
+
 export const bootLines = [
   'Initializing ombak.dev...',
-  'Checking display adapter: COBALT_CRT_OK',
-  'Loading portfolio kernel modules...',
-  'Mounting /projects as corrupted system volume...',
-  'Starting developer environment...',
-  'OMBAK.DEV loaded successfully',
+  'Loading profile data...',
+  'Loading projects...',
+  'Loading skills...',
+  'Starting portfolio interface...',
+  'Ready.',
 ]
 
 export const projects: Project[] = [
   {
-    file: 'NOIR_ROBOT.SYS',
-    title: 'Autonomous Robotics Module',
-    status: 'DRIVER_LOADED',
-    summary: 'Embedded robotics experiments with sensor input, control loops, and resilient hardware-software behavior.',
+    file: 'REMOTE_SENSING.SYS',
+    title: 'Autonomous Remote Sensing & Teleoperation System',
+    status: 'ACTIVE',
+    summary:
+      'Real-time teleoperated robotic system for mapping low-visibility and confined environments.',
     details:
-      'A cinematic robotics slot for low-level device work: Raspberry Pi workflows, live telemetry, practical control logic, and hardware-minded debugging.',
-    stack: ['Python', 'Raspberry Pi', 'GPIO', 'Robotics', 'WebSockets'],
-    links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
-  },
-  {
-    file: 'TOPSTEREO.EXE',
-    title: 'TopStereo',
-    status: 'USERSPACE_ACTIVE',
-    summary: 'Full-stack audio and community tooling with a clean product surface over a technical backend.',
-    details:
-      'Built as a real application layer: API design, database state, authentication surfaces, and front-end flows that feel fast under repeated use.',
-    stack: ['React', 'Node.js', 'Express', 'MongoDB', 'TypeScript'],
-    links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
-  },
-  {
-    file: 'RAG_CHATBOT.DLL',
-    title: 'Retrieval Chat System',
-    status: 'MEMORY_RESIDENT',
-    summary: 'AI-assisted retrieval workflow for turning source material into grounded conversational software.',
-    details:
-      'A practical exploration of embeddings, retrieval, prompt boundaries, and interfaces that keep AI output useful, inspectable, and grounded.',
-    stack: ['Python', 'PyTorch', 'RAG', 'Vector Search', 'AI'],
+      'Integrated 2D LiDAR, dual infrared camera modules, live web controls, camera switching, system monitoring, watchdog timers, and remote command execution across Raspberry Pi and ESP32 hardware.',
+    stack: ['Raspberry Pi', 'ESP32', 'LiDAR', 'IR Vision', 'React', 'Embedded Systems'],
     links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
   },
   {
     file: 'OAUTH_LIB.PY',
-    title: 'Authentication Utility',
-    status: 'PATCH_VERIFIED',
-    summary: 'Reusable OAuth-oriented backend code shaped for secure flows and maintainable integration points.',
+    title: 'OAuth Integration Library',
+    status: 'ACTIVE',
+    summary:
+      'Lightweight Python library for OAuth 2.0 authentication flows in internal enterprise applications.',
     details:
-      'A security-conscious module concept covering token exchange, route protection, error states, and predictable developer ergonomics.',
-    stack: ['Python', 'OAuth', 'APIs', 'Security', 'Backend'],
+      'Implemented Authorization Code Flow with PKCE and Client Credentials Flow, with secure token handling, modular integration points, Postman-tested flows, and robust error handling.',
+    stack: ['Python', 'OAuth 2.0', 'PKCE', 'APIs', 'Postman'],
+    links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
+  },
+  {
+    file: 'RAG_RISK_BOT.DLL',
+    title: 'RAG Risk Prediction Chatbot',
+    status: 'ACTIVE',
+    summary:
+      'Retrieval-augmented chatbot for evaluating project risk using historical project data.',
+    details:
+      'Led intern collaboration on a chatbot trained around 10,000+ historical project records, with prompt engineering and training-data preparation to reduce hallucinations and improve reliability.',
+    stack: ['Python', 'RAG', 'PyTorch', 'Machine Learning', 'Prompt Engineering'],
+    links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
+  },
+  {
+    file: 'MUSIC_GRID.EXE',
+    title: 'Full-Stack Music Visualization App',
+    status: 'ACTIVE',
+    summary:
+      'Interactive album grid builder with external API data, image handling, and custom visual layouts.',
+    details:
+      'Built a React interface with drag-and-drop albums, a Node.js and Express backend for user data and album metadata, image export, dynamic grid scaling, and custom background styling.',
+    stack: ['React', 'Node.js', 'Express', 'APIs', 'JavaScript'],
     links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
   },
 ]
@@ -64,22 +76,68 @@ export const skills = [
   'Python',
   'Java',
   'C#',
+  'JavaScript',
   'TypeScript',
+  'SQL',
   'Node.js',
-  'React',
-  'MongoDB',
-  'Raspberry Pi',
-  'WebSockets',
-  'PyTorch',
   'Express',
+  'Django',
+  '.NET',
+  'React',
+  'PyTorch',
+  'Postman',
+  'Git',
+  'Active Directory',
+  'PowerShell',
+  'Raspberry Pi',
+  'ESP32',
   'Embedded Systems',
   'Robotics',
-  'AI-assisted Development',
+  'Machine Learning',
 ]
 
 export const diagnostics = [
-  '*** STOP: 0x00000050 (0x0MBAKDEV,0x00000001,0xC0DEBEEF,0x00000000)',
-  '*** OM_BAKHSHI_PORTFOLIO.EXE - Address 0MBAK517 base at 0000DEV0',
-  'Beginning dump of portfolio memory',
-  'Physical memory dump complete.',
+  'Name: Om Bakhshi',
+  'Focus: Software development, embedded systems, full stack',
+  'Education: B.S. Computer Engineering Technology, Kent State University',
+  'Expected graduation: Dec 2026',
+  'Location: Kent, OH',
+]
+
+export const education = [
+  'Kent State University - B.S. Computer Engineering Technology, expected Dec 2026',
+  'Cuyahoga Valley Career Center - Certificate of Career Preparation in Programming and Software Development, May 2022',
+]
+
+export const experience: Experience[] = [
+  {
+    role: 'Software Developer Intern',
+    organization: 'Progressive Insurance',
+    date: 'May 2025 - Aug 2025; May 2026 - Aug 2026',
+    summary:
+      'Software engineering internship focused on internal tooling, authentication, and applied AI workflows.',
+    highlights: [
+      'Developed a Python OAuth integration library supporting multiple enterprise auth flows.',
+      'Created a retrieval-augmented chatbot for assessing project risk from historical project records.',
+      'Integrated secure API token exchange with custom Python modules.',
+    ],
+  },
+  {
+    role: 'Desktop Support Technician',
+    organization: 'Kent State University',
+    date: 'Jan 2024 - May 2026',
+    summary:
+      'Technology support role for faculty, staff, labs, classrooms, and building launch readiness.',
+    highlights: [
+      'Provided hardware and software troubleshooting for Crawford College of Business.',
+      'Managed setup and maintenance for 300+ lab and classroom devices.',
+      'Supported technology preparation for building opening and classroom readiness.',
+    ],
+  },
+]
+
+export const certifications = [
+  'Hybrid Server Pro: Core - TestOut',
+  'Hybrid Server Pro: Advanced - TestOut',
+  'Security Pro - TestOut',
 ]
