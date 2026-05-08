@@ -9,9 +9,48 @@
       content="Ombak Bakhshi portfolio - software developer, embedded systems, robotics, and full stack projects."
     />
     <title>ombak.dev | OM_BAKHSHI_PORTFOLIO.EXE</title>
+    <style>
+      body {
+        margin: 0;
+        background: #0000aa;
+        color: #fff;
+        font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+      }
+
+      .source-file-warning {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .source-file-warning pre {
+        width: min(760px, 100%);
+        white-space: pre-wrap;
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        padding: 24px;
+        line-height: 1.65;
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.16);
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="source-file-warning">
+        <pre>*** STOP: VITE_SOURCE_FILE_OPENED_DIRECTLY ***
+
+This React portfolio is not meant to run from file://index.html.
+
+Run:
+  npm install
+  npm run dev
+
+Then open:
+  http://127.0.0.1:5173/
+
+If that port is busy, Vite will print the correct local URL.</pre>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
