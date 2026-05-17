@@ -17,6 +17,15 @@ const dumpRows = [
   '0137:0000AA55  4F 41 55 54 48 5F 4C 49 42 2E 50 59 00 52 41 47',
 ]
 
+function SectionTitle({ code, title }: { code: string; title: string }) {
+  return (
+    <div className="section-title" aria-label={title}>
+      <span>{code}</span>
+      <span>{title}</span>
+    </div>
+  )
+}
+
 function BootSequence({ onComplete }: { onComplete: () => void }) {
   const [visibleLines, setVisibleLines] = useState(0)
 
@@ -81,16 +90,18 @@ function HeaderBlock() {
 function DiagnosticReport() {
   return (
     <section className="bsod-block" id="diagnostics">
-      <p>Diagnostic report:</p>
+      <SectionTitle code="00" title="SYSTEM DIAGNOSTIC REPORT" />
       {diagnostics.map((line) => (
-        <p key={line}> &nbsp; {line}</p>
+        <p className="field-row" key={line}>
+          {line}
+        </p>
       ))}
-      <p>
-        &nbsp; Public recovery address: ombakh28@gmail.com
+      <p className="field-row">
+        Public recovery address: ombakh28@gmail.com
         <br />
-        &nbsp; Linked module path: linkedin.com/in/ombakh
+        Linked module path: linkedin.com/in/ombakh
         <br />
-        &nbsp; Source repository: github.com/ombakh
+        Source repository: github.com/ombakh
       </p>
     </section>
   )
@@ -99,10 +110,10 @@ function DiagnosticReport() {
 function ExperienceLogs() {
   return (
     <section className="bsod-block" id="experience">
-      <p>System process log:</p>
+      <SectionTitle code="01" title="SYSTEM PROCESS LOG" />
       {experience.map((item, index) => (
         <div className="log-entry" key={`${item.role}-${item.organization}`}>
-          <p>
+          <p className="entry-heading">
             [{String(index).padStart(2, '0')}] PROCESS: {item.role.toUpperCase()}
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;OWNER: {item.organization}
@@ -112,7 +123,9 @@ function ExperienceLogs() {
             &nbsp;&nbsp;&nbsp;&nbsp;NOTE: {item.summary}
           </p>
           {item.highlights.map((highlight) => (
-            <p key={highlight}>&nbsp;&nbsp;&nbsp;&nbsp;- {highlight}</p>
+            <p className="entry-line" key={highlight}>
+              - {highlight}
+            </p>
           ))}
         </div>
       ))}
@@ -123,19 +136,28 @@ function ExperienceLogs() {
 function ProjectModules() {
   return (
     <section className="bsod-block" id="projects">
-      <p>The problem appears to be caused by the following portfolio modules:</p>
+      <SectionTitle code="02" title="FAULTING PORTFOLIO MODULES" />
+      <p className="section-note">The problem appears to be caused by the following portfolio modules:</p>
       {projects.map((project) => (
         <article className="module-entry" key={project.file}>
-          <p>
-            *** {project.file} - {project.title}
+          <p className="entry-heading">
+            *** {project.file}
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;Status: {project.status}
+            &nbsp;&nbsp;&nbsp;&nbsp;NAME: {project.title}
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;Description: {project.summary}
+            &nbsp;&nbsp;&nbsp;&nbsp;STATUS: {project.status}
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;Detail: {project.details}
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;Stack: {project.stack.join(', ')}
+            &nbsp;&nbsp;&nbsp;&nbsp;STACK: {project.stack.join(', ')}
+          </p>
+          <p className="entry-line">{project.summary}</p>
+          <p className="entry-line">
+            Detail: {project.details}
+            {project.links.length > 0 && (
+              <>
+                <br />
+                Link: {project.links.map((link) => link.href).join(' | ')}
+              </>
+            )}
           </p>
         </article>
       ))}
@@ -155,36 +177,54 @@ function SkillsAndEducation() {
   )
 
   return (
-    <section className="bsod-block" id="skills">
-      <p>Loaded kernel components:</p>
-      {componentRows.map((row) => (
-        <p key={row.skill}>
-          &nbsp;&nbsp;{row.address} &nbsp; {row.irq.padEnd(5, ' ')} &nbsp; {row.skill}
-        </p>
-      ))}
+    <>
+      <section className="bsod-block" id="skills">
+        <SectionTitle code="03" title="LOADED KERNEL COMPONENTS" />
+        <div className="component-grid">
+          {componentRows.map((row) => (
+            <p key={row.skill}>
+              {row.address} &nbsp; {row.irq.padEnd(5, ' ')} &nbsp; {row.skill}
+            </p>
+          ))}
+        </div>
+      </section>
 
-      <p className="spaced">Education records found in system registry:</p>
-      {education.map((item) => (
-        <p key={item}>&nbsp;&nbsp;HKLM\\EDUCATION\\{item}</p>
-      ))}
+      <section className="bsod-block" id="education">
+        <SectionTitle code="04" title="REGISTRY RECORDS" />
+        <p className="section-note">Education records found in system registry:</p>
+        {education.map((item) => (
+          <p className="field-row" key={item}>
+            HKLM\\EDUCATION\\{item}
+          </p>
+        ))}
 
-      <p className="spaced">Installed certification drivers:</p>
-      {certifications.map((item) => (
-        <p key={item}>&nbsp;&nbsp;{item}</p>
-      ))}
-    </section>
+        <p className="section-note spaced">Installed certification drivers:</p>
+        {certifications.map((item) => (
+          <p className="field-row" key={item}>
+            {item}
+          </p>
+        ))}
+      </section>
+    </>
   )
 }
 
 function MemoryDump() {
   return (
     <section className="bsod-block memory-block" id="memory">
+      <SectionTitle code="05" title="PHYSICAL MEMORY DUMP" />
       <p>Beginning dump of physical memory...</p>
-      {dumpRows.map((row) => (
-        <p key={row}>{row}</p>
-      ))}
+      <div className="dump-lines">
+        {dumpRows.map((row) => (
+          <p key={row}>{row}</p>
+        ))}
+      </div>
       <p>Physical memory dump complete.</p>
-      <p>Contact recovery data: ombakh28@gmail.com | github.com/ombakh</p>
+      <p>
+        Contact recovery data:
+        <br />
+        ombakh28@gmail.com | github.com/ombakh | linkedin.com/in/ombakh
+      </p>
     </section>
   )
 }

@@ -64,12 +64,12 @@ button {
 }
 
 .bsod-block {
-  margin: 0 0 22px 0;
+  margin: 0 0 30px 0;
   white-space: normal;
 }
 
 .bsod-block p {
-  margin: 0 0 13px 0;
+  margin: 0 0 10px 0;
 }
 
 .hero-block {
@@ -84,13 +84,72 @@ button {
   text-transform: uppercase;
 }
 
+.section-title {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  column-gap: 10px;
+  width: min(760px, 100%);
+  margin: 0 0 14px 0;
+  padding: 2px 0 4px 0;
+  border-top: 1px solid rgba(244, 244, 244, 0.72);
+  border-bottom: 1px solid rgba(244, 244, 244, 0.72);
+  text-transform: uppercase;
+}
+
+.section-title span:first-child::before {
+  content: "[";
+}
+
+.section-title span:first-child::after {
+  content: "]";
+}
+
+.section-note {
+  margin-bottom: 14px !important;
+}
+
+.field-row,
+.entry-line {
+  padding-left: 4ch;
+}
+
+.entry-heading {
+  margin-bottom: 8px !important;
+}
+
 .log-entry,
 .module-entry {
+  width: min(860px, 100%);
   margin: 0 0 18px 0;
+  padding: 0 0 12px 0;
+  border-bottom: 1px dashed rgba(244, 244, 244, 0.34);
+}
+
+.log-entry:last-child,
+.module-entry:last-child {
+  border-bottom: 0;
+}
+
+.component-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  width: min(820px, 100%);
+  column-gap: 26px;
+}
+
+.component-grid p,
+.dump-lines p {
+  margin: 0 0 6px 0;
+}
+
+.dump-lines {
+  width: min(840px, 100%);
+  margin: 0 0 14px 0;
+  padding-left: 4ch;
 }
 
 .spaced {
-  margin-top: 24px !important;
+  margin-top: 18px !important;
 }
 
 .memory-block {
@@ -284,5 +343,20 @@ button {
 
   .panic-title {
     font-size: 13px;
+  }
+
+  .section-title {
+    grid-template-columns: 34px 1fr;
+    column-gap: 8px;
+  }
+
+  .field-row,
+  .entry-line,
+  .dump-lines {
+    padding-left: 2ch;
+  }
+
+  .component-grid {
+    grid-template-columns: 1fr;
   }
 }
