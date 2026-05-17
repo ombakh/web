@@ -268,7 +268,6 @@ function App() {
   return (
     <div className={distort ? 'screen-shell is-distorting' : 'screen-shell'}>
       {!booted && <BootSequence onComplete={() => setBooted(true)} />}
-      <div className="crt-vignette" />
       <div className="crt-noise" />
       <div className="crt-scanlines" />
 
