@@ -21,6 +21,8 @@ html {
   min-height: 100%;
   background: #00007b;
   scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -47,24 +49,26 @@ button {
   background: #00007b;
   color: #f4f4f4;
   isolation: isolate;
+  overflow-x: hidden;
 }
 
 .bsod-screen {
   position: relative;
   z-index: 2;
-  width: min(1040px, calc(100vw - 30px));
+  width: min(1060px, calc(100vw - 32px));
   min-height: 100vh;
-  padding: 18px 0 120px 0;
-  margin-left: 14px;
+  padding: 18px 0 120px;
+  margin-left: 16px;
   font-size: 14px;
   line-height: 1.28;
   letter-spacing: 0;
   text-align: left;
   text-shadow: 0 0 2px rgba(255, 255, 255, 0.32);
+  overflow-wrap: break-word;
 }
 
 .bsod-block {
-  width: min(960px, 100%);
+  width: min(980px, 100%);
   margin: 0 0 36px 0;
   white-space: normal;
 }
@@ -87,10 +91,10 @@ button {
 
 .profile-recovery {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 176px;
+  grid-template-columns: minmax(0, 1fr) clamp(150px, 18vw, 190px);
   align-items: start;
   gap: 24px;
-  width: min(900px, 100%);
+  width: min(940px, 100%);
   margin-top: 4px;
 }
 
@@ -100,13 +104,15 @@ button {
 
 .headshot-frame {
   margin: 0;
-  width: 176px;
+  width: 100%;
+  max-width: 190px;
 }
 
 .headshot-frame img {
   display: block;
-  width: 176px;
-  height: 176px;
+  width: 100%;
+  aspect-ratio: 1;
+  height: auto;
   object-fit: cover;
   border: 2px solid rgba(244, 244, 244, 0.9);
   filter: grayscale(1) contrast(1.08) brightness(0.96);
@@ -124,12 +130,17 @@ button {
   display: grid;
   grid-template-columns: 42px 1fr;
   column-gap: 10px;
-  width: min(900px, 100%);
+  width: min(940px, 100%);
   margin: 0 0 16px 0;
   padding: 4px 0 5px 0;
   border-top: 1px solid rgba(244, 244, 244, 0.72);
   border-bottom: 1px solid rgba(244, 244, 244, 0.72);
   text-transform: uppercase;
+}
+
+.section-title span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .section-title span:first-child::before {
@@ -149,6 +160,7 @@ button {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
+  overflow-wrap: anywhere;
 }
 
 .terminal-link:hover,
@@ -163,15 +175,17 @@ button {
 .entry-line {
   max-width: 86ch;
   padding-left: 3ch;
+  overflow-wrap: anywhere;
 }
 
 .entry-heading {
   margin-bottom: 9px !important;
+  overflow-wrap: anywhere;
 }
 
 .log-entry,
 .module-entry {
-  width: min(900px, 100%);
+  width: min(940px, 100%);
   margin: 0 0 22px 0;
   padding: 0 0 16px 0;
   border-bottom: 1px dashed rgba(244, 244, 244, 0.34);
@@ -184,20 +198,22 @@ button {
 
 .component-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
-  width: min(900px, 100%);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(940px, 100%);
   column-gap: 34px;
 }
 
 .component-grid p,
 .dump-lines p {
   margin: 0 0 6px 0;
+  overflow-wrap: anywhere;
 }
 
 .dump-lines {
-  width: min(840px, 100%);
+  width: min(940px, 100%);
   margin: 0 0 14px 0;
   padding-left: 4ch;
+  overflow-wrap: anywhere;
 }
 
 .spaced {
@@ -370,16 +386,43 @@ button {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 980px) {
+  .bsod-screen {
+    width: calc(100vw - 24px);
+    margin-left: 12px;
+  }
+
+  .profile-recovery {
+    grid-template-columns: minmax(0, 1fr) 150px;
+    gap: 18px;
+  }
+
+  .headshot-frame {
+    max-width: 150px;
+  }
+
+  .field-row,
+  .entry-line {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
   .bsod-screen,
   .boot-screen {
     font-size: 12px;
+    line-height: 1.34;
   }
 
   .bsod-screen {
     width: calc(100vw - 18px);
     margin-left: 8px;
     padding-top: 10px;
+    padding-bottom: 88px;
+  }
+
+  .bsod-block {
+    margin-bottom: 30px;
   }
 
   .panic-title {
@@ -397,7 +440,7 @@ button {
   }
 
   .headshot-frame img {
-    height: 132px;
+    height: auto;
   }
 
   .section-title {
@@ -413,5 +456,33 @@ button {
 
   .component-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .bsod-screen,
+  .boot-screen {
+    font-size: 11px;
+  }
+
+  .bsod-screen {
+    width: calc(100vw - 12px);
+    margin-left: 6px;
+  }
+
+  .section-title {
+    grid-template-columns: 30px 1fr;
+    column-gap: 6px;
+  }
+
+  .field-row,
+  .entry-line,
+  .dump-lines {
+    padding-left: 0;
+  }
+
+  .headshot-frame,
+  .headshot-frame img {
+    width: 116px;
   }
 }
