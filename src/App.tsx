@@ -77,12 +77,25 @@ function HeaderBlock() {
       </p>
 
       <p className="panic-title">OM_BAKHSHI.EXE</p>
-      <p>
-        Software Developer / Computer Engineering Technology / Full Stack
-        <br />
-        Kent State University
-        <span className="block-cursor inline-cursor" />
-      </p>
+      <div className="profile-recovery">
+        <div className="profile-copy">
+          <p>
+            Software Developer / Computer Engineering Technology / Full Stack
+            <br />
+            Kent State University
+          </p>
+          <p>
+            Builds web systems, internal tools, robotics controls, and applied AI workflows.
+            <br />
+            Current focus: practical software with embedded systems and automation.
+            <span className="block-cursor inline-cursor" />
+          </p>
+        </div>
+        <figure className="headshot-frame">
+          <img src="/headshot.jpeg" alt="Om Bakhshi headshot" />
+          <figcaption>PROFILE_IMG.BMP recovered</figcaption>
+        </figure>
+      </div>
     </header>
   )
 }
@@ -90,7 +103,7 @@ function HeaderBlock() {
 function DiagnosticReport() {
   return (
     <section className="bsod-block" id="diagnostics">
-      <SectionTitle code="00" title="SYSTEM DIAGNOSTIC REPORT" />
+      <SectionTitle code="00" title="PROFILE / RECOVERY DATA" />
       {diagnostics.map((line) => (
         <p className="field-row" key={line}>
           {line}
@@ -110,7 +123,7 @@ function DiagnosticReport() {
 function ExperienceLogs() {
   return (
     <section className="bsod-block" id="experience">
-      <SectionTitle code="01" title="SYSTEM PROCESS LOG" />
+      <SectionTitle code="01" title="EXPERIENCE LOGS" />
       {experience.map((item, index) => (
         <div className="log-entry" key={`${item.role}-${item.organization}`}>
           <p className="entry-heading">
@@ -136,8 +149,8 @@ function ExperienceLogs() {
 function ProjectModules() {
   return (
     <section className="bsod-block" id="projects">
-      <SectionTitle code="02" title="FAULTING PORTFOLIO MODULES" />
-      <p className="section-note">The problem appears to be caused by the following portfolio modules:</p>
+      <SectionTitle code="02" title="PROJECT MODULES" />
+      <p className="section-note">Recovered project modules:</p>
       {projects.map((project) => (
         <article className="module-entry" key={project.file}>
           <p className="entry-heading">
@@ -179,7 +192,7 @@ function SkillsAndEducation() {
   return (
     <>
       <section className="bsod-block" id="skills">
-        <SectionTitle code="03" title="LOADED KERNEL COMPONENTS" />
+        <SectionTitle code="03" title="TECHNICAL SKILLS" />
         <div className="component-grid">
           {componentRows.map((row) => (
             <p key={row.skill}>
@@ -190,7 +203,7 @@ function SkillsAndEducation() {
       </section>
 
       <section className="bsod-block" id="education">
-        <SectionTitle code="04" title="REGISTRY RECORDS" />
+        <SectionTitle code="04" title="EDUCATION / CERTIFICATIONS" />
         <p className="section-note">Education records found in system registry:</p>
         {education.map((item) => (
           <p className="field-row" key={item}>
