@@ -110,7 +110,7 @@ export const education = [
 
 export const experience: Experience[] = [
   {
-    role: 'Software Developer Intern',
+    role: '2x Software Developer Intern',
     organization: 'Progressive Insurance',
     date: 'May 2025 - Aug 2025; May 2026 - Aug 2026',
     summary:
