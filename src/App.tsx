@@ -17,6 +17,27 @@ const dumpRows = [
   '0137:0000AA55  4F 41 55 54 48 5F 4C 49 42 2E 50 59 00 52 41 47',
 ]
 
+const contactLinks = {
+  email: 'mailto:ombakh28@gmail.com',
+  github: 'https://github.com/ombakh',
+  linkedin: 'https://www.linkedin.com/in/ombakh',
+}
+
+function TerminalLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const isExternal = href.startsWith('http')
+
+  return (
+    <a
+      className="terminal-link"
+      href={href}
+      rel={isExternal ? 'noreferrer' : undefined}
+      target={isExternal ? '_blank' : undefined}
+    >
+      {children}
+    </a>
+  )
+}
+
 function SectionTitle({ code, title }: { code: string; title: string }) {
   return (
     <div className="section-title" aria-label={title}>
@@ -110,11 +131,13 @@ function DiagnosticReport() {
         </p>
       ))}
       <p className="field-row">
-        Public recovery address: ombakh28@gmail.com
+        Public recovery address:{' '}
+        <TerminalLink href={contactLinks.email}>ombakh28@gmail.com</TerminalLink>
         <br />
-        Linked module path: linkedin.com/in/ombakh
+        Linked module path:{' '}
+        <TerminalLink href={contactLinks.linkedin}>linkedin.com/in/ombakh</TerminalLink>
         <br />
-        Source repository: github.com/ombakh
+        Source repository: <TerminalLink href={contactLinks.github}>github.com/ombakh</TerminalLink>
       </p>
     </section>
   )
@@ -168,7 +191,13 @@ function ProjectModules() {
             {project.links.length > 0 && (
               <>
                 <br />
-                Link: {project.links.map((link) => link.href).join(' | ')}
+                Link:{' '}
+                {project.links.map((link, linkIndex) => (
+                  <span key={`${project.file}-${link.href}`}>
+                    {linkIndex > 0 && ' | '}
+                    <TerminalLink href={link.href}>{link.label}</TerminalLink>
+                  </span>
+                ))}
               </>
             )}
           </p>
@@ -236,7 +265,9 @@ function MemoryDump() {
       <p>
         Contact recovery data:
         <br />
-        ombakh28@gmail.com | github.com/ombakh | linkedin.com/in/ombakh
+        <TerminalLink href={contactLinks.email}>ombakh28@gmail.com</TerminalLink> |{' '}
+        <TerminalLink href={contactLinks.github}>github.com/ombakh</TerminalLink> |{' '}
+        <TerminalLink href={contactLinks.linkedin}>linkedin.com/in/ombakh</TerminalLink>
       </p>
     </section>
   )

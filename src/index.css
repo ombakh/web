@@ -144,6 +144,21 @@ button {
   margin-bottom: 16px !important;
 }
 
+.terminal-link {
+  color: #f4f4f4;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.terminal-link:hover,
+.terminal-link:focus {
+  color: #00007b;
+  background: #f4f4f4;
+  outline: 0;
+  text-decoration: none;
+}
+
 .field-row,
 .entry-line {
   max-width: 86ch;
