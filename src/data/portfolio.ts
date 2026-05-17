@@ -34,7 +34,7 @@ export const projects: Project[] = [
       'Real-time teleoperated robotic system for mapping low-visibility and confined environments.',
     details:
       'Integrated 2D LiDAR, dual infrared camera modules, live web controls, camera switching, system monitoring, watchdog timers, and remote command execution across Raspberry Pi and ESP32 hardware.',
-    stack: ['Raspberry Pi', 'ESP32', 'LiDAR', 'IR Vision', 'React', 'Embedded Systems'],
+    stack: ['Raspberry Pi', 'ESP32', 'LiDAR', 'IR Vision', 'Node.js', 'Embedded Systems'],
     links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
   },
   {
