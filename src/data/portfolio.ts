@@ -100,12 +100,11 @@ export const diagnostics = [
   'Name: Om Bakhshi',
   'Focus: Software development, embedded systems, full stack',
   'Education: B.S. Computer Engineering Technology, Kent State University',
-  'Expected graduation: Dec 2026',
   'Location: Kent, OH',
 ]
 
 export const education = [
-  'Kent State University - B.S. Computer Engineering Technology, expected Dec 2026',
+  'Kent State University - B.S. Computer Engineering Technology',
   'Cuyahoga Valley Career Center - Certificate of Career Preparation in Programming and Software Development, May 2022',
 ]
 

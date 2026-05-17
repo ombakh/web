@@ -71,7 +71,7 @@ function HeaderBlock({ lastKey }: { lastKey: string }) {
       <p>
         Software Developer / Computer Engineering Technology / Full Stack
         <br />
-        Kent State University - expected graduation Dec 2026
+        Kent State University
         <br />
         Last keyboard interrupt: {lastKey || 'none'}
         <span className="block-cursor inline-cursor" />
