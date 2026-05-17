@@ -46,7 +46,7 @@ export const projects: Project[] = [
     details:
       'Implemented Authorization Code Flow with PKCE and Client Credentials Flow, with secure token handling, modular integration points, Postman-tested flows, and robust error handling.',
     stack: ['Python', 'OAuth 2.0', 'PKCE', 'APIs', 'Postman'],
-    links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
+    links: [],
   },
   {
     file: 'RAG_RISK_BOT.DLL',
@@ -57,7 +57,7 @@ export const projects: Project[] = [
     details:
       'Led intern collaboration on a chatbot trained around 10,000+ historical project records, with prompt engineering and training-data preparation to reduce hallucinations and improve reliability.',
     stack: ['Python', 'RAG', 'PyTorch', 'Machine Learning', 'Prompt Engineering'],
-    links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
+    links: [],
   },
   {
     file: 'MUSIC_GRID.EXE',
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     details:
       'Built a React interface with drag-and-drop albums, a Node.js and Express backend for user data and album metadata, image export, dynamic grid scaling, and custom background styling.',
     stack: ['React', 'Node.js', 'Express', 'APIs', 'JavaScript'],
-    links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
+    links: [],
   },
 ]
 
