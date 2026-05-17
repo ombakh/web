@@ -47,7 +47,7 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
   )
 }
 
-function HeaderBlock({ lastKey }: { lastKey: string }) {
+function HeaderBlock() {
   return (
     <header className="bsod-block hero-block">
       <p>A fatal exception 0E has occurred at 0028:C0011E36 in OM_BAKHSHI.EXE.</p>
@@ -72,8 +72,6 @@ function HeaderBlock({ lastKey }: { lastKey: string }) {
         Software Developer / Computer Engineering Technology / Full Stack
         <br />
         Kent State University
-        <br />
-        Last keyboard interrupt: {lastKey || 'none'}
         <span className="block-cursor inline-cursor" />
       </p>
     </header>
@@ -193,12 +191,10 @@ function MemoryDump() {
 
 function App() {
   const [booted, setBooted] = useState(false)
-  const [lastKey, setLastKey] = useState('')
   const [distort, setDistort] = useState(false)
 
   useEffect(() => {
-    const handleKey = (event: KeyboardEvent) => {
-      setLastKey(event.key === ' ' ? 'SPACE' : event.key.toUpperCase())
+    const handleKey = () => {
       setDistort(true)
       window.setTimeout(() => setDistort(false), 110)
     }
@@ -224,7 +220,7 @@ function App() {
       <div className="crt-scanlines" />
 
       <main className="bsod-screen" aria-label="Windows 98 style portfolio crash screen">
-        <HeaderBlock lastKey={lastKey} />
+        <HeaderBlock />
         <DiagnosticReport />
         <ExperienceLogs />
         <ProjectModules />
