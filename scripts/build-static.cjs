@@ -66,12 +66,12 @@ async function build() {
       content="Ombak Bakhshi portfolio presented as a retro Windows 95 / Windows 98 blue screen diagnostic."
     />
     <title>ombak.dev | OM_BAKHSHI.EXE</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/assets/app.css" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./assets/app.css" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/assets/app.js"></script>
+    <script type="module" src="./assets/app.js"></script>
   </body>
 </html>
 `,
