@@ -5,6 +5,7 @@ const esbuild = require('esbuild')
 const root = process.cwd()
 const dist = path.join(root, 'dist')
 const assets = path.join(dist, 'assets')
+const assetVersion = 'profile-2'
 
 function copyDir(source, target) {
   if (!fs.existsSync(source)) return
@@ -66,12 +67,12 @@ async function build() {
       content="Ombak Bakhshi portfolio presented as a retro Windows 95 / Windows 98 blue screen diagnostic."
     />
     <title>ombak.dev | OM_BAKHSHI.EXE</title>
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="stylesheet" href="./assets/app.css" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=${assetVersion}" />
+    <link rel="stylesheet" href="./assets/app.css?v=${assetVersion}" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./assets/app.js"></script>
+    <script type="module" src="./assets/app.js?v=${assetVersion}"></script>
   </body>
 </html>
 `,

@@ -113,7 +113,7 @@ function HeaderBlock() {
           </p>
         </div>
         <figure className="headshot-frame">
-          <img src="./headshot.jpeg" alt="Om Bakhshi headshot" />
+          <img src="./headshot.jpeg?v=profile-2" alt="Om Bakhshi headshot" />
           <figcaption>PROFILE_IMG.BMP recovered</figcaption>
         </figure>
       </div>
