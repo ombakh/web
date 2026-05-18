@@ -5,7 +5,7 @@ const esbuild = require('esbuild')
 const root = process.cwd()
 const dist = path.join(root, 'dist')
 const assets = path.join(dist, 'assets')
-const assetVersion = 'profile-2'
+const assetVersion = 'jazz-1'
 
 function copyDir(source, target) {
   if (!fs.existsSync(source)) return

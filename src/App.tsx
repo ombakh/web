@@ -23,6 +23,19 @@ const contactLinks = {
   linkedin: 'https://www.linkedin.com/in/ombakh',
 }
 
+const sectionIds = ['diagnostics', 'experience', 'projects', 'skills', 'education', 'memory']
+
+function TextMeter({ label, value }: { label: string; value: number }) {
+  const filled = Math.round((value / 100) * 12)
+  const meter = `${'#'.repeat(filled)}${'.'.repeat(12 - filled)}`
+
+  return (
+    <p className="meter-line">
+      {label.padEnd(11, ' ')} [{meter}] {String(value).padStart(3, '0')}%
+    </p>
+  )
+}
+
 function TerminalLink({ href, children }: { href: string; children: React.ReactNode }) {
   const isExternal = href.startsWith('http')
 
@@ -43,7 +56,21 @@ function SectionTitle({ code, title }: { code: string; title: string }) {
     <div className="section-title" aria-label={title}>
       <span>{code}</span>
       <span>{title}</span>
+      <span className="section-pulse" aria-hidden="true">
+        0101
+      </span>
     </div>
+  )
+}
+
+function DiagnosticsOverlay({ activeSection, uptime }: { activeSection: string; uptime: number }) {
+  return (
+    <aside className="diagnostic-overlay" aria-label="Live diagnostics">
+      <p>LIVE_DIAGNOSTICS</p>
+      <p>ACTIVE: {activeSection.toUpperCase()}</p>
+      <p>UPTIME: {String(uptime).padStart(5, '0')}s</p>
+      <p>DISPLAY: VGA_SAFE_MODE</p>
+    </aside>
   )
 }
 
@@ -71,6 +98,9 @@ function BootSequence({ onComplete }: { onComplete: () => void }) {
         {bootLines.slice(0, visibleLines).map((line) => (
           <p key={line}>{line}</p>
         ))}
+        <div className="boot-meter" aria-hidden="true">
+          <span style={{ width: `${Math.min((visibleLines / bootLines.length) * 100, 100)}%` }} />
+        </div>
         <span className="block-cursor" />
       </div>
     </div>
@@ -111,9 +141,14 @@ function HeaderBlock() {
             Current focus: practical software with embedded systems and automation.
             <span className="block-cursor inline-cursor" />
           </p>
+          <div className="profile-meters" aria-label="Recovered profile metrics">
+            <TextMeter label="WEB_STACK" value={91} />
+            <TextMeter label="EMBEDDED" value={84} />
+            <TextMeter label="AI_TOOLS" value={78} />
+          </div>
         </div>
         <figure className="headshot-frame">
-          <img src="./headshot.jpeg?v=profile-2" alt="Om Bakhshi headshot" />
+          <img src="./headshot.jpeg?v=jazz-1" alt="Om Bakhshi headshot" />
           <figcaption>PROFILE_IMG.BMP recovered</figcaption>
         </figure>
       </div>
@@ -276,6 +311,8 @@ function MemoryDump() {
 function App() {
   const [booted, setBooted] = useState(false)
   const [distort, setDistort] = useState(false)
+  const [activeSection, setActiveSection] = useState('boot')
+  const [uptime, setUptime] = useState(0)
 
   useEffect(() => {
     const handleKey = () => {
@@ -296,9 +333,37 @@ function App() {
     return () => window.clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setUptime((current) => current + 1)
+    }, 1000)
+
+    return () => window.clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let currentSection = 'profile'
+
+      for (const id of sectionIds) {
+        const element = document.getElementById(id)
+        if (element && element.getBoundingClientRect().top < window.innerHeight * 0.42) {
+          currentSection = id
+        }
+      }
+
+      setActiveSection(currentSection)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div className={distort ? 'screen-shell is-distorting' : 'screen-shell'}>
       {!booted && <BootSequence onComplete={() => setBooted(true)} />}
+      <DiagnosticsOverlay activeSection={activeSection} uptime={uptime} />
       <div className="crt-noise" />
       <div className="crt-scanlines" />
 
