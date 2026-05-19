@@ -25,17 +25,6 @@ const contactLinks = {
 
 const sectionIds = ['diagnostics', 'experience', 'projects', 'skills', 'education', 'memory']
 
-function TextMeter({ label, value }: { label: string; value: number }) {
-  const filled = Math.round((value / 100) * 12)
-  const meter = `${'#'.repeat(filled)}${'.'.repeat(12 - filled)}`
-
-  return (
-    <p className="meter-line">
-      {label.padEnd(11, ' ')} [{meter}] {String(value).padStart(3, '0')}%
-    </p>
-  )
-}
-
 function TerminalLink({ href, children }: { href: string; children: React.ReactNode }) {
   const isExternal = href.startsWith('http')
 
@@ -56,9 +45,6 @@ function SectionTitle({ code, title }: { code: string; title: string }) {
     <div className="section-title" aria-label={title}>
       <span>{code}</span>
       <span>{title}</span>
-      <span className="section-pulse" aria-hidden="true">
-        0101
-      </span>
     </div>
   )
 }
@@ -141,14 +127,9 @@ function HeaderBlock() {
             Current focus: practical software with embedded systems and automation.
             <span className="block-cursor inline-cursor" />
           </p>
-          <div className="profile-meters" aria-label="Recovered profile metrics">
-            <TextMeter label="WEB_STACK" value={91} />
-            <TextMeter label="EMBEDDED" value={84} />
-            <TextMeter label="AI_TOOLS" value={78} />
-          </div>
         </div>
         <figure className="headshot-frame">
-          <img src="./headshot.jpeg?v=jazz-1" alt="Om Bakhshi headshot" />
+          <img src="./headshot.jpeg?v=jazz-2" alt="Om Bakhshi headshot" />
           <figcaption>PROFILE_IMG.BMP recovered</figcaption>
         </figure>
       </div>
@@ -187,11 +168,11 @@ function ExperienceLogs() {
           <p className="entry-heading">
             [{String(index).padStart(2, '0')}] PROCESS: {item.role.toUpperCase()}
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;OWNER: {item.organization}
+            <span>OWNER: {item.organization}</span>
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;TIME: {item.date}
+            <span>TIME: {item.date}</span>
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;NOTE: {item.summary}
+            <span>NOTE: {item.summary}</span>
           </p>
           {item.highlights.map((highlight) => (
             <p className="entry-line" key={highlight}>
@@ -214,11 +195,11 @@ function ProjectModules() {
           <p className="entry-heading">
             *** {project.file}
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;NAME: {project.title}
+            <span>NAME: {project.title}</span>
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;STATUS: {project.status}
+            <span>STATUS: {project.status}</span>
             <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;STACK: {project.stack.join(', ')}
+            <span>STACK: {project.stack.join(', ')}</span>
           </p>
           <p className="entry-line">{project.summary}</p>
           <p className="entry-line">
@@ -260,7 +241,9 @@ function SkillsAndEducation() {
         <div className="component-grid">
           {componentRows.map((row) => (
             <p key={row.skill}>
-              {row.address} &nbsp; {row.irq.padEnd(5, ' ')} &nbsp; {row.skill}
+              <span>{row.address}</span>
+              <span>{row.irq}</span>
+              <span>{row.skill}</span>
             </p>
           ))}
         </div>

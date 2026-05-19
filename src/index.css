@@ -128,16 +128,6 @@ button {
   min-width: 0;
 }
 
-.profile-meters {
-  width: min(420px, 100%);
-  margin-top: 18px;
-}
-
-.meter-line {
-  margin: 0 0 5px 0 !important;
-  white-space: pre;
-}
-
 .headshot-frame {
   margin: 0;
   width: 100%;
@@ -164,7 +154,7 @@ button {
 
 .section-title {
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) auto;
+  grid-template-columns: 42px minmax(0, 1fr);
   column-gap: 10px;
   width: min(940px, 100%);
   margin: 0 0 clamp(14px, 2vw, 20px) 0;
@@ -188,11 +178,6 @@ button {
   content: "]";
 }
 
-.section-pulse {
-  animation: pulse-code 1.6s steps(2, end) infinite;
-  opacity: 0.72;
-}
-
 .section-note {
   margin-bottom: 16px !important;
 }
@@ -207,22 +192,24 @@ button {
 
 .terminal-link:hover,
 .terminal-link:focus {
-  color: #00007b;
-  background: #f4f4f4;
+  color: #f4f4f4;
+  background: rgba(244, 244, 244, 0.12);
   outline: 0;
-  text-decoration: none;
 }
 
 .log-entry:hover,
 .module-entry:hover,
 .headshot-frame:hover {
-  background: rgba(244, 244, 244, 0.08);
+  background: rgba(244, 244, 244, 0.045);
 }
 
 .module-entry:hover .entry-heading,
 .log-entry:hover .entry-heading {
-  color: #00007b;
-  background: #f4f4f4;
+  color: #f4f4f4;
+  background: transparent;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .field-row,
@@ -235,6 +222,11 @@ button {
 .entry-heading {
   margin-bottom: 9px !important;
   overflow-wrap: anywhere;
+}
+
+.entry-heading span {
+  display: inline-block;
+  padding-left: 4ch;
 }
 
 .log-entry,
@@ -255,6 +247,12 @@ button {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   width: min(940px, 100%);
   column-gap: clamp(20px, 4vw, 40px);
+}
+
+.component-grid p {
+  display: grid;
+  grid-template-columns: 8ch 6ch minmax(0, 1fr);
+  column-gap: 2ch;
 }
 
 .component-grid p,
@@ -461,18 +459,6 @@ button {
   }
 }
 
-@keyframes pulse-code {
-  0%,
-  49% {
-    opacity: 0.28;
-  }
-
-  50%,
-  100% {
-    opacity: 0.88;
-  }
-}
-
 @keyframes section-settle {
   0% {
     transform: translateX(-2px);
@@ -547,7 +533,7 @@ button {
   }
 
   .section-title {
-    grid-template-columns: 34px 1fr auto;
+    grid-template-columns: 34px 1fr;
     column-gap: 8px;
   }
 
@@ -578,14 +564,14 @@ button {
     column-gap: 6px;
   }
 
-  .section-pulse {
-    display: none;
-  }
-
   .field-row,
   .entry-line,
   .dump-lines {
     padding-left: 0;
+  }
+
+  .entry-heading span {
+    padding-left: 2ch;
   }
 
   .headshot-frame,
@@ -596,7 +582,6 @@ button {
 
 @media (prefers-reduced-motion: reduce) {
   .section-title,
-  .section-pulse,
   .boot-meter span,
   .screen-shell::before,
   .screen-shell::after,
