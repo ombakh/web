@@ -24,6 +24,7 @@ const contactLinks = {
 }
 
 const sectionIds = ['diagnostics', 'experience', 'projects', 'skills', 'education', 'memory']
+type SiteMode = 'bsod' | 'normal'
 
 function TerminalLink({ href, children }: { href: string; children: React.ReactNode }) {
   const isExternal = href.startsWith('http')
@@ -129,7 +130,7 @@ function HeaderBlock() {
           </p>
         </div>
         <figure className="headshot-frame">
-          <img src="./headshot.jpeg?v=profile-bmp-1" alt="Om Bakhshi headshot" />
+          <img src="./headshot.jpeg?v=mode-toggle-1" alt="Om Bakhshi headshot" />
           <figcaption>PROFILE_IMG.BMP recovered</figcaption>
         </figure>
       </div>
@@ -291,7 +292,127 @@ function MemoryDump() {
   )
 }
 
-function App() {
+function ModeToggle({ mode, onToggle }: { mode: SiteMode; onToggle: () => void }) {
+  return (
+    <button className="mode-toggle" type="button" onClick={onToggle}>
+      {mode === 'bsod' ? 'Normal view' : 'BSOD view'}
+    </button>
+  )
+}
+
+function NormalPortfolio({ onToggle }: { onToggle: () => void }) {
+  return (
+    <div className="normal-shell">
+      <ModeToggle mode="normal" onToggle={onToggle} />
+      <main className="normal-page" aria-label="Om Bakhshi portfolio">
+        <header className="normal-hero">
+          <div className="normal-intro">
+            <p className="normal-kicker">Software Developer</p>
+            <h1>Om Bakhshi</h1>
+            <p className="normal-summary">
+              Computer Engineering Technology student focused on full stack software,
+              embedded systems, robotics, internal tools, and applied AI workflows.
+            </p>
+            <div className="normal-actions" aria-label="Contact links">
+              <TerminalLink href={contactLinks.email}>Email</TerminalLink>
+              <TerminalLink href={contactLinks.github}>GitHub</TerminalLink>
+              <TerminalLink href={contactLinks.linkedin}>LinkedIn</TerminalLink>
+            </div>
+          </div>
+          <figure className="normal-headshot">
+            <img src="./headshot.jpeg?v=mode-toggle-1" alt="Om Bakhshi headshot" />
+          </figure>
+        </header>
+
+        <section className="normal-section">
+          <h2>Profile</h2>
+          <div className="normal-fields">
+            {diagnostics.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
+        </section>
+
+        <section className="normal-section">
+          <h2>Experience</h2>
+          <div className="normal-stack">
+            {experience.map((item) => (
+              <article className="normal-card" key={`${item.role}-${item.organization}`}>
+                <div className="normal-card-heading">
+                  <div>
+                    <h3>{item.role}</h3>
+                    <p>{item.organization}</p>
+                  </div>
+                  <span>{item.date}</span>
+                </div>
+                <p>{item.summary}</p>
+                <ul>
+                  {item.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="normal-section">
+          <h2>Projects</h2>
+          <div className="normal-project-grid">
+            {projects.map((project) => (
+              <article className="normal-card" key={project.module}>
+                <p className="normal-module">{project.module}</p>
+                <h3>{project.title}</h3>
+                <p>{project.summary}</p>
+                <p>{project.details}</p>
+                <div className="normal-chip-row">
+                  {project.stack.map((item) => (
+                    <span key={`${project.module}-${item}`}>{item}</span>
+                  ))}
+                </div>
+                {project.links.length > 0 && (
+                  <p className="normal-link-row">
+                    {project.links.map((link) => (
+                      <TerminalLink href={link.href} key={link.href}>
+                        {link.label}
+                      </TerminalLink>
+                    ))}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="normal-section normal-two-column">
+          <div>
+            <h2>Skills</h2>
+            <div className="normal-chip-row">
+              {skills.map((skill) => (
+                <span key={skill}>{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h2>Education & Certifications</h2>
+            {education.map((item) => (
+              <p className="normal-line" key={item}>
+                {item}
+              </p>
+            ))}
+            {certifications.map((item) => (
+              <p className="normal-line" key={item}>
+                {item}
+              </p>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
+  )
+}
+
+function BsodPortfolio({ onToggle }: { onToggle: () => void }) {
   const [booted, setBooted] = useState(false)
   const [distort, setDistort] = useState(false)
   const [activeSection, setActiveSection] = useState('boot')
@@ -345,6 +466,7 @@ function App() {
 
   return (
     <div className={distort ? 'screen-shell is-distorting' : 'screen-shell'}>
+      <ModeToggle mode="bsod" onToggle={onToggle} />
       {!booted && <BootSequence onComplete={() => setBooted(true)} />}
       <DiagnosticsOverlay activeSection={activeSection} uptime={uptime} />
       <div className="crt-noise" />
@@ -363,6 +485,13 @@ function App() {
       </main>
     </div>
   )
+}
+
+function App() {
+  const [mode, setMode] = useState<SiteMode>('bsod')
+  const toggleMode = () => setMode((current) => (current === 'bsod' ? 'normal' : 'bsod'))
+
+  return mode === 'bsod' ? <BsodPortfolio onToggle={toggleMode} /> : <NormalPortfolio onToggle={toggleMode} />
 }
 
 export default App

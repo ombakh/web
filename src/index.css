@@ -39,6 +39,10 @@ button {
   cursor: default;
 }
 
+button {
+  font: inherit;
+}
+
 ::selection {
   color: #00007b;
   background: #f4f4f4;
@@ -50,6 +54,30 @@ button {
   color: #f4f4f4;
   isolation: isolate;
   overflow-x: hidden;
+}
+
+.mode-toggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 80;
+  padding: 7px 10px;
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background: rgba(244, 244, 244, 0.94);
+  color: #00007b;
+  font-size: 12px;
+  line-height: 1;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.mode-toggle:hover,
+.mode-toggle:focus {
+  background: #00007b;
+  color: #f4f4f4;
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
 }
 
 .bsod-screen {
@@ -65,6 +93,207 @@ button {
   text-align: left;
   text-shadow: 0 0 2px rgba(255, 255, 255, 0.32);
   overflow-wrap: break-word;
+}
+
+.normal-shell {
+  min-height: 100vh;
+  background: #f4f1e8;
+  color: #141414;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  cursor: auto;
+}
+
+.normal-shell a,
+.normal-shell button {
+  cursor: pointer;
+}
+
+.normal-shell .mode-toggle {
+  background: #111;
+  color: #f4f1e8;
+  border-color: #111;
+}
+
+.normal-shell .mode-toggle:hover,
+.normal-shell .mode-toggle:focus {
+  background: #f4f1e8;
+  color: #111;
+}
+
+.normal-page {
+  width: min(1120px, calc(100vw - 36px));
+  margin: 0 auto;
+  padding: clamp(34px, 6vw, 76px) 0 clamp(56px, 8vw, 96px);
+}
+
+.normal-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(150px, 20vw, 230px);
+  gap: clamp(28px, 6vw, 72px);
+  align-items: end;
+  padding-bottom: clamp(34px, 6vw, 64px);
+  border-bottom: 2px solid #151515;
+}
+
+.normal-kicker {
+  margin: 0 0 16px 0;
+  font-family: Fixedsys, "Terminal", "Lucida Console", "Courier New", monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.normal-intro h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(52px, 11vw, 128px);
+  line-height: 0.88;
+  letter-spacing: 0;
+}
+
+.normal-summary {
+  max-width: 720px;
+  margin: 28px 0 0 0;
+  font-size: clamp(18px, 2.6vw, 28px);
+  line-height: 1.18;
+}
+
+.normal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.normal-shell .terminal-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid #151515;
+  color: #151515;
+  font-family: Fixedsys, "Terminal", "Lucida Console", "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.normal-shell .terminal-link:hover,
+.normal-shell .terminal-link:focus {
+  background: #151515;
+  color: #f4f1e8;
+  outline: 0;
+}
+
+.normal-headshot {
+  margin: 0;
+}
+
+.normal-headshot img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid #151515;
+  filter: grayscale(0.15) contrast(1.04);
+}
+
+.normal-section {
+  padding: clamp(32px, 5vw, 56px) 0;
+  border-bottom: 1px solid rgba(21, 21, 21, 0.22);
+}
+
+.normal-section h2 {
+  margin: 0 0 22px 0;
+  font-family: Fixedsys, "Terminal", "Lucida Console", "Courier New", monospace;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.normal-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.normal-card {
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid #151515;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.normal-card h3 {
+  margin: 0 0 8px 0;
+  font-size: clamp(20px, 2.5vw, 28px);
+  line-height: 1.08;
+}
+
+.normal-card p,
+.normal-line,
+.normal-fields p {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.normal-card p:last-child,
+.normal-line:last-child,
+.normal-fields p:last-child {
+  margin-bottom: 0;
+}
+
+.normal-card ul {
+  margin: 16px 0 0 0;
+  padding-left: 20px;
+}
+
+.normal-card li {
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+
+.normal-card-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.normal-card-heading > span,
+.normal-module {
+  font-family: Fixedsys, "Terminal", "Lucida Console", "Courier New", monospace;
+  font-size: 12px !important;
+  text-transform: uppercase;
+}
+
+.normal-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.normal-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.normal-chip-row span {
+  padding: 6px 8px;
+  border: 1px solid rgba(21, 21, 21, 0.36);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.normal-link-row {
+  margin-top: 18px !important;
+}
+
+.normal-two-column {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(26px, 5vw, 58px);
 }
 
 .diagnostic-overlay {
@@ -498,6 +727,41 @@ button {
 }
 
 @media (max-width: 760px) {
+  .mode-toggle {
+    top: 8px;
+    right: 8px;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .normal-page {
+    width: min(100vw - 24px, 680px);
+    padding-top: 58px;
+  }
+
+  .normal-hero,
+  .normal-project-grid,
+  .normal-two-column {
+    grid-template-columns: 1fr;
+  }
+
+  .normal-hero {
+    align-items: start;
+  }
+
+  .normal-headshot {
+    width: 148px;
+  }
+
+  .normal-card-heading {
+    display: block;
+  }
+
+  .normal-card-heading > span {
+    display: inline-block;
+    margin-top: 8px;
+  }
+
   .bsod-screen,
   .boot-screen {
     font-size: 12px;
