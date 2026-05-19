@@ -130,7 +130,7 @@ function HeaderBlock() {
           </p>
         </div>
         <figure className="headshot-frame">
-          <img src="./headshot.jpeg?v=mode-toggle-1" alt="Om Bakhshi headshot" />
+          <img src="./headshot.jpeg?v=mode-toggle-2" alt="Om Bakhshi headshot" />
           <figcaption>PROFILE_IMG.BMP recovered</figcaption>
         </figure>
       </div>
@@ -295,7 +295,7 @@ function MemoryDump() {
 function ModeToggle({ mode, onToggle }: { mode: SiteMode; onToggle: () => void }) {
   return (
     <button className="mode-toggle" type="button" onClick={onToggle}>
-      {mode === 'bsod' ? 'Normal view' : 'BSOD view'}
+      {mode === 'bsod' ? 'View: Normal' : 'View: BSOD'}
     </button>
   )
 }
@@ -320,7 +320,7 @@ function NormalPortfolio({ onToggle }: { onToggle: () => void }) {
             </div>
           </div>
           <figure className="normal-headshot">
-            <img src="./headshot.jpeg?v=mode-toggle-1" alt="Om Bakhshi headshot" />
+            <img src="./headshot.jpeg?v=mode-toggle-2" alt="Om Bakhshi headshot" />
           </figure>
         </header>
 
