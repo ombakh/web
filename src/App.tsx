@@ -130,7 +130,7 @@ function HeaderBlock() {
           </p>
         </div>
         <figure className="headshot-frame">
-          <img src="./headshot.jpeg?v=mode-toggle-2" alt="Om Bakhshi headshot" />
+          <img src="./headshot.jpeg?v=mode-toggle-3" alt="Om Bakhshi headshot" />
           <figcaption>PROFILE_IMG.BMP recovered</figcaption>
         </figure>
       </div>
@@ -320,7 +320,7 @@ function NormalPortfolio({ onToggle }: { onToggle: () => void }) {
             </div>
           </div>
           <figure className="normal-headshot">
-            <img src="./headshot.jpeg?v=mode-toggle-2" alt="Om Bakhshi headshot" />
+            <img src="./headshot.jpeg?v=mode-toggle-3" alt="Om Bakhshi headshot" />
           </figure>
         </header>
 
