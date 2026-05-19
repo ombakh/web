@@ -17,7 +17,7 @@ export type Experience = {
 }
 
 export const bootLines = [
-  'Initializing ombak.dev...',
+  'Initializing profile...',
   'Loading profile data...',
   'Loading projects...',
   'Loading skills...',

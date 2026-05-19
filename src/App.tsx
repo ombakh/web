@@ -108,7 +108,7 @@ function HeaderBlock() {
       </p>
 
       <p>
-        System halted while loading portfolio data from ombak.dev. The following
+        System halted while loading portfolio data. The following
         <br />
         diagnostic information was recovered from physical memory:
       </p>
@@ -129,7 +129,7 @@ function HeaderBlock() {
           </p>
         </div>
         <figure className="headshot-frame">
-          <img src="./headshot.jpeg?v=jazz-2" alt="Om Bakhshi headshot" />
+          <img src="./headshot.jpeg?v=no-domain-1" alt="Om Bakhshi headshot" />
           <figcaption>PROFILE_IMG.BMP recovered</figcaption>
         </figure>
       </div>

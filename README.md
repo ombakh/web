@@ -1,4 +1,4 @@
-# ombak.dev portfolio
+# Om Bakhshi portfolio
 
 A React, Tailwind CSS, and Framer Motion portfolio site inspired by the classic Windows XP blue screen aesthetic.
 
