@@ -1,5 +1,5 @@
 export type Project = {
-  file: string
+  module: string
   title: string
   status: string
   summary: string
@@ -27,7 +27,7 @@ export const bootLines = [
 
 export const projects: Project[] = [
   {
-    file: 'REMOTE_SENSING.SYS',
+    module: 'REMOTE_SENSING',
     title: 'Autonomous Remote Sensing & Teleoperation System',
     status: 'ACTIVE',
     summary:
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     links: [{ label: 'GitHub', href: 'https://github.com/ombakh' }],
   },
   {
-    file: 'OAUTH_LIB.PY',
+    module: 'OAUTH_LIBRARY',
     title: 'OAuth Integration Library',
     status: 'ACTIVE',
     summary:
@@ -49,7 +49,7 @@ export const projects: Project[] = [
     links: [],
   },
   {
-    file: 'RAG_RISK_BOT.DLL',
+    module: 'RAG_RISK_BOT',
     title: 'RAG Risk Prediction Chatbot',
     status: 'ACTIVE',
     summary:
@@ -60,7 +60,7 @@ export const projects: Project[] = [
     links: [],
   },
   {
-    file: 'MUSIC_GRID.EXE',
+    module: 'MUSIC_GRID',
     title: 'Full-Stack Music Visualization App',
     status: 'ACTIVE',
     summary:

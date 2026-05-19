@@ -129,8 +129,8 @@ function HeaderBlock() {
           </p>
         </div>
         <figure className="headshot-frame">
-          <img src="./headshot.jpeg?v=no-domain-1" alt="Om Bakhshi headshot" />
-          <figcaption>PROFILE_IMG.BMP recovered</figcaption>
+          <img src="./headshot.jpeg?v=readability-1" alt="Om Bakhshi headshot" />
+          <figcaption>Profile image recovered</figcaption>
         </figure>
       </div>
     </header>
@@ -189,11 +189,11 @@ function ProjectModules() {
   return (
     <section className="bsod-block" id="projects">
       <SectionTitle code="02" title="PROJECT MODULES" />
-      <p className="section-note">Recovered project modules:</p>
+      <p className="section-note">Recovered project records:</p>
       {projects.map((project) => (
-        <article className="module-entry" key={project.file}>
+        <article className="module-entry" key={project.module}>
           <p className="entry-heading">
-            *** {project.file}
+            *** MODULE: {project.module}
             <br />
             <span>NAME: {project.title}</span>
             <br />
@@ -209,7 +209,7 @@ function ProjectModules() {
                 <br />
                 Link:{' '}
                 {project.links.map((link, linkIndex) => (
-                  <span key={`${project.file}-${link.href}`}>
+                  <span key={`${project.module}-${link.href}`}>
                     {linkIndex > 0 && ' | '}
                     <TerminalLink href={link.href}>{link.label}</TerminalLink>
                   </span>
@@ -227,8 +227,8 @@ function SkillsAndEducation() {
   const componentRows = useMemo(
     () =>
       skills.map((skill, index) => ({
-        address: `VXD_${String(index + 1).padStart(2, '0')}`,
-        irq: `IRQ ${index % 8}`,
+        address: `SKILL ${String(index + 1).padStart(2, '0')}`,
+        irq: `SET ${index % 4}`,
         skill,
       })),
     [],
